@@ -1,4 +1,4 @@
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image/image.jpeg?raw=true)
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image/image.jpg?raw=true)
 # Tp-linkWN722NV2
 RealTek RTL8188eus WiFi driver with monitor mode &amp; frame injection support
 
