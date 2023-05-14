@@ -151,32 +151,32 @@ class Before:
         Colors.light_blue("\n UPGRADE FINISHED ")
         time.sleep(0.5)
         # Installing bc
-        Colors.light_green("\n INSTALLING BC ")
+        Colors.light_blue("\n INSTALLING BC ")
         time.sleep(0.5)
         os.system("\n sudo apt-get install bc")
         time.sleep(0.5)
-        Colors.light_green("\n INSTALLED BC ")
+        Colors.light_blue("\n INSTALLED BC ")
         time.sleep(0.5)
         # Installing bulid-essential
-        Colors.light_green("\n INSTALLING BUILD-ESSENTIAL")
+        Colors.light_blue("\n INSTALLING BUILD-ESSENTIAL")
         time.sleep(0.5)
         os.system("\n sudo apt-get install build-essential")
         time.sleep(0.5)
-        Colors.light_green("\n INSTALLED BUILD-ESSENTIAL")
+        Colors.light_blue("\n INSTALLED BUILD-ESSENTIAL")
         time.sleep(0.5)
         # Installing libelf-dev
-        Colors.light_green("\n INSTALLING LIBELF-DEV")
+        Colors.light_blue("\n INSTALLING LIBELF-DEV")
         time.sleep(0.5)
         os.system("\n sudo apt-get install libelf-dev")
         time.sleep(0.5)
-        Colors.light_green("\n INSTALLED LIBELF-DEV")
+        Colors.light_blue("\n INSTALLED LIBELF-DEV")
         time.sleep(0.5)
         # Installing linux-headers
-        Colors.light_green("\n INSTALLING LINUX-HEADERS-UNAME-R")
+        Colors.light_blue("\n INSTALLING LINUX-HEADERS-UNAME-R")
         time.sleep(0.5)
         os.system("\n sudo apt-get install linux-headers-$(uname -r)")
         time.sleep(0.5)
-        Colors.light_green("\n INSTALLED LINUX-HEADERS-UNAME-R")
+        Colors.light_blue("\n INSTALLED LINUX-HEADERS-UNAME-R")
         time.sleep(0.5)
         # Installing dkms
         Colors.light_blue("\n INSTALLING DKMS")
@@ -387,6 +387,169 @@ class CodeCreater:
         except ValueError:
             Operators.case_default()
 
+# class MakeError:
+class MakeError:
+    # Comment Repository
+    def comment_repo():
+        # Comment
+        def ct_repo():
+            replace = ["#deb http://http.kali.org/kali kali-rolling main contrib non-free"]
+
+            with open("/etc/apt/sources.list", "r") as file:
+                commentrepo = file.read()
+
+                commentrepo = commentrepo.replace(
+                    "deb http://http.kali.org/kali kali-rolling main contrib non-free",
+                    replace[0],
+                )
+            with open("/etc/apt/sources.list", "w") as file:
+                file.write("" +commentrepo)
+
+
+        def no_case():
+            
+            print(colr().hex("#ff0000", "Kali Repo Not Comment Yet", rgb_mode=True))
+
+        answer = input(
+            colr().hex(
+                "#af50a2",
+                "If you want to comment [ # ] the repository line of kali linux in \nthe source file that adds by this script y or n : ",
+                rgb_mode=True,
+            )
+        )
+
+        # Comment repo switch
+        switch = {
+            "y": ct_repo,
+            "Y": ct_repo,
+            "yes": ct_repo,
+            "YES": ct_repo,
+            "NO": no_case,
+            "n": no_case,
+            "no": no_case,
+            "N": no_case,
+        }
+
+        switch_case = switch.get(str(answer), Operators.case_default)
+        switch_case()
+    def iferrormake():
+        time.sleep(0.5)
+        Colors.orange(" \n If you get make error again")
+        time.sleep(0.5)
+        Colors.orange(" \n Please message me on twitter with the error photo.")
+        time.sleep(0.5)
+        Colors.orange(" \n Twitter link: https://twitter.com/varkmarker")
+        time.sleep(0.5)
+        Colors.light_blue(" \n AUTHOR: VARKMARKER \n")
+        time.sleep(0.5)
+    def aftermake():
+        time.sleep(0.5)
+        # Make installing
+        Colors.light_blue("\n MAKE INSTALLING")
+        time.sleep(0.5)
+        os.system("sudo apt install make")
+        time.sleep(0.5)
+        # Installing bulid-essential
+        Colors.light_blue("\n INSTALLING BUILD-ESSENTIAL")
+        time.sleep(0.5)
+        os.system("\n sudo apt-get install build-essential")
+        time.sleep(0.5)
+       # Installing dkms
+        Colors.light_blue("\n INSTALLING DKMS")
+        time.sleep(0.5)
+        os.system("\n sudo apt-get install dkms")
+        time.sleep(0.5)
+        # Make command's
+        Colors.light_blue("\n MAKING STARTED")
+        time.sleep(0.5)
+        os.system("\n sudo make")
+        Colors.light_blue(
+            " \n If you get any Error messages during the Make command execution y or n:"
+        )
+        time.sleep(0.5)
+        choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+        choice = choice.lower()
+        #  If the  make function has no error. This command will execute during the installation.
+        def make_after():
+
+            time.sleep(0.5)
+            # Make install
+            Colors.light_blue("\n RUNNING MAKE INSTALL ")
+            time.sleep(0.5)
+            os.system("\n sudo make install")
+            time.sleep(0.5)
+            os.system("\n sudo modprobe 8188eu")
+            time.sleep(0.5)
+            # Calling the comment repository function
+            MakeError.comment_repo()    
+        try:
+            if choice == "y" or choice == "yes":
+                MakeError.iferrormake()
+            elif choice == "n" or choice == "no":
+                make_after()
+        except ValueError:
+            Operators.case_default()
+    def solvemake():
+        Colors.red(" \n REMOVING MAKE COMMAND ")
+        time.sleep(0.5)
+        os.system("sudo apt-get remove make")
+        # Check kali linux repository already exist or not
+        # kali linux リポジトリが既に存在するかどうかを確認します
+        file_path = "/etc/apt/sources.list"
+        one_string = "deb http://http.kali.org/kali kali-rolling main contrib non-free"
+        second_string = "#deb http://http.kali.org/kali kali-rolling main contrib non-free"
+
+        with open(file_path, "r") as f:
+            file_contents = f.read()
+
+        # Check if the line is found in the file
+        if second_string in file_contents:
+            # Comment Repository
+            def comment_repo():
+                replace = [
+                    "deb http://http.kali.org/kali kali-rolling main contrib non-free"
+                ]
+
+                with open("/etc/apt/sources.list", "r") as file:
+                    Commandrepo = file.read()
+
+                    Commandrepo = Commandrepo.replace(
+                        "#deb http://http.kali.org/kali kali-rolling main contrib non-free",
+                        replace[0],
+                    )
+                with open("/etc/apt/sources.list", "w") as file:
+                    file.write("" + Commandrepo)
+                os.system("sudo apt-get update")
+                MakeError.aftermake()
+
+            comment_repo()
+
+        elif one_string in file_contents:
+            os.system("sudo apt-get update")
+            MakeError.aftermake()
+        else:
+            # Add Repository
+            def add_repo():
+                with open("/etc/apt/sources.list", "a") as file:
+                    file.write(
+                        "\n".join(
+                            [
+                                "#KALI LINUX REPOSITORY ",
+                                "deb http://http.kali.org/kali kali-rolling main contrib non-free",
+                            ]
+                        )
+                    )
+
+                os.system(
+                    "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys ED444FF07D8D0BF6",
+                )
+
+                os.system("sudo apt-get update")
+                MakeError.aftermake()
+
+            add_repo()
+    
+
 class After:
     # Session two
     def session_two():
@@ -396,14 +559,10 @@ class After:
         time.sleep(0.5)
         os.system("\n sudo apt-get update")
         time.sleep(0.5)
-        Colors.light_blue("\n UPDATE FINISHED ")
-        time.sleep(0.5)
         # Make command's
         Colors.light_blue("\n MAKING STARTED")
         time.sleep(0.5)
         os.system("\n sudo make")
-        time.sleep(0.5)
-        Colors.light_blue("\n MAKING FINISHED")
         time.sleep(0.5)
         Colors.light_blue(
             " \n If you get any Error messages during the Make command execution y or n:"
@@ -429,51 +588,52 @@ class After:
 
         try:
             if choice == "y" or choice == "yes":
-                make_after()
+                MakeError.solvemake()
             elif choice == "n" or choice == "no":
                 make_after()
         except ValueError:
             Operators.case_default()
 
+
 # Privileges check
-# if os.geteuid() != 0:
-#     Colors.red(" \n THIS SCRIPT REQUIRES SUDO PRIVILEGES . \n")
-#     exit(1)
-# else:
-# Welcome Banner
-time.sleep(0.5)
-Colors.red(
-    """\n  
-                ********** *******         **        **  ****     **  **   **
-                /////**/// /**////**       /**      /** /**/**   /** /**  ** 
-                    /**    /**   /**       /**      /** /**//**  /** /** **  
-                    /**    /*******  ***** /**      /** /** //** /** /****   
-                    /**    /**////  /////  /**      /** /**  //**/** /**/**  
-                    /**    /**             /**      /** /**   //**** /**//** 
-                    /**    /**             /********/** /**    //*** /** //**
-                    //     //              //////// //  //      ///  //   // """
-)
-Colors.blue(
-    "\n                                                                WN722NV2"
-)
-time.sleep(0.5)
-Colors.orange(
-    "\n IT IS A TOOL TO INSTALL THE TP-LINK VERSION 2 WIFI ADAPTER DRIVE THAT SUPPORTS MONITOR MODE "
-)
-# Main choice function that call functions
-Colors.sky_blue(
-    "\n   [1] FIRST STEP      [2] SECOND STEP \n   [3] MAKE ERROR STEP [4] AUTOMATIC CODE GIVER + EXECUTING \n   [5] EXIT"
-)
-time.sleep(0.5)
-choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
-switch = {
-    1: Before.session_one,
-    2: After.session_two,
-    4: CodeCreater.injection_code,
-    5: Operators.exit,
-}
-try:
-    switch_case = switch.get(int(choice), Operators.case_default)
-    switch_case()
-except ValueError:
-    Operators.case_default()
+if os.geteuid() != 0:
+    Colors.red(" \n THIS SCRIPT REQUIRES SUDO PRIVILEGES . \n")
+    exit(1)
+else:
+    # Welcome Banner
+    time.sleep(0.5)
+    Colors.red(
+        """\n  
+                    ********** *******         **        **  ****     **  **   **
+                    /////**/// /**////**       /**      /** /**/**   /** /**  ** 
+                        /**    /**   /**       /**      /** /**//**  /** /** **  
+                        /**    /*******  ***** /**      /** /** //** /** /****   
+                        /**    /**////  /////  /**      /** /**  //**/** /**/**  
+                        /**    /**             /**      /** /**   //**** /**//** 
+                        /**    /**             /********/** /**    //*** /** //**
+                        //     //              //////// //  //      ///  //   // """
+    )
+    Colors.blue(
+        "\n                                                                WN722NV2"
+    )
+    time.sleep(0.5)
+    Colors.orange(
+        "\n IT IS A TOOL TO INSTALL THE TP-LINK VERSION 2 WIFI ADAPTER DRIVE THAT SUPPORTS MONITOR MODE "
+    )
+    # Main choice function that call functions
+    Colors.sky_blue(
+        "\n   [1] FIRST STEP               [2] SECOND STEP \n   [3] AUTOMATIC CODE GIVER     [4] EXIT"
+    )
+    time.sleep(0.5)
+    choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+    switch = {
+        1: Before.session_one,
+        2: After.session_two,
+        3: CodeCreater.injection_code,
+        4: Operators.exit,
+    }
+    try:
+        switch_case = switch.get(int(choice), Operators.case_default)
+        switch_case()
+    except ValueError:
+        Operators.case_default()
