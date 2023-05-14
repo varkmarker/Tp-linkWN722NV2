@@ -223,9 +223,217 @@ class Before:
         except ValueError:
             Operators.case_default()
 
+class CodeCreater:
+    # Get user wifi drive interface name
+    def injection_code():
+        time.sleep(0.5)
+        os.system("iwconfig")
+        time.sleep(0.5)
+        Colors.red("\n Enter you wifi adapter system name ? \n Eg: wlan0")
+        time.sleep(0.5)
+        interface = input(colr().hex("#fff300", "> ", rgb_mode=True))
+        time.sleep(0.5)
+        Colors.sky_blue(f" \n Driver : {interface}\n")
+        name_upper = interface.upper()
+        name_lower = interface.lower()
+        time.sleep(0.5)
+        Colors.cream("This is your name of the driver y or n")
+        choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+        choice = choice.lower()
+        # Choice of show and excute command.
+        def show_execute(name_upper, name_lower):
+            Colors.light_blue("\n [1] SHOW THE COMMAND  [2] Execute   \n [3] Exit")
+            px = input(colr().hex("#fff300", "> ", rgb_mode=True))
+            # Monitor mode command showing to the user.
+            def show_the_command(name_upper, name_lower):
+                time.sleep(0.5)
+                Colors.red("\n COMMANDS FOR MONITOR MODE ENABLING ")
+                time.sleep(0.5)
+                Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo ifconfig {name_lower} down")
+                time.sleep(0.5)
+                Colors.light_blue("\n AIRMON-NG KILL ALL PROCESS")
+                time.sleep(0.5)
+                Colors.green("\n $ sudo airmon-ng check kill")
+                time.sleep(0.5)
+                Colors.light_blue("\n ENABLE MONITOR MODE COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo iwconfig {name_lower} mode monitor")
+                time.sleep(0.5)
+                Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo ifconfig {name_lower} up")
+                time.sleep(0.5)
+                Colors.light_blue(
+                    "\n SHOWING THE IWCONFIG RESULT. \n CHECK MONITOR MODE IS ENABLE"
+                )
+                time.sleep(0.5)
+                Colors.green("\n $ iwconfig")
+                time.sleep(0.5)
+                Colors.light_blue(f"\n {name_upper} INJECTION COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo aireplay-ng --test {name_lower}")
+                time.sleep(0.5)
+                Colors.red(
+                    "\n If you want to change the wifi to normal state as well your network manager. Use the below commands."
+                )
+                time.sleep(0.5)
+                Colors.orange("\n Commands for change the monitor mode to auto mode")
+                time.sleep(0.5)
+                Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo ifconfig {name_lower} down")
+                time.sleep(0.5)
+                Colors.light_blue("\n CHANGE MODE TO AUTO")
+                Colors.green(f"\n $ sudo iwconfig {name_lower} mode auto")
+                time.sleep(0.5)
+                Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo ifconfig {name_lower} up")
+                time.sleep(0.5)
+                Colors.orange("\n Command for restart the network manager.")
+                time.sleep(0.5)
+                Colors.green(f"\n $ sudo systemctl restart NetworkManager")
+                time.sleep(0.5)
+                Colors.red("\n You can test by entering the following command manually")
+                Operators.exit_author()
 
+            # Monitor mode execute command
+            def execute_the_command(name_upper, name_lower):
+                # Monior mode change to auto [mmca] and restart network manager [rnm]
+                def mmca_rnm():
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                    time.sleep(0.5)
+                    os.system(f"sudo ifconfig {name_lower} down")
+                    time.sleep(0.5)
+                    os.system(f"sudo iwconfig {name_lower} mode auto")
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                    time.sleep(0.5)
+                    os.system(f"sudo ifconfig {name_lower} up")
+                    time.sleep(0.5)
+                    Colors.orange("\n Command for restart the network manager.")
+                    time.sleep(0.5)
+                    os.system(f"sudo systemctl restart NetworkManager")
+                    time.sleep(0.5)
+                    Operators.exit_author()
 
+                time.sleep(0.5)
+                Colors.red(f"\n {name_upper} DOWN")
+                time.sleep(0.5)
+                os.system(f" sudo ifconfig {name_lower} down")
+                time.sleep(0.5)
+                Colors.red("\n AIRMON-NG KILL ALL PROCESS")
+                time.sleep(0.5)
+                os.system("sudo airmon-ng check kill")
+                time.sleep(0.5)
+                Colors.red("\n ENABLE MONITOR MODE")
+                time.sleep(0.5)
+                os.system(f"sudo iwconfig {name_lower} mode monitor")
+                time.sleep(0.5)
+                Colors.red(f"\n {name_upper} UP")
+                time.sleep(0.5)
+                os.system(f"sudo ifconfig {name_lower} up")
+                time.sleep(0.5)
+                Colors.red(
+                    "\n SHOWING THE IWCONFIG RESULT. \n CHECK MONITOR MODE IS ENABLE"
+                )
+                time.sleep(0.5)
+                os.system(" iwconfig")
+                time.sleep(0.5)
+                Colors.red(f"\n {name_upper} INJECTION STARTED")
+                time.sleep(0.5)
+                os.system(f"sudo aireplay-ng --test {name_lower}")
+                time.sleep(0.7)
+                Colors.red(f"\n {name_upper} INJECTION STOPPED")
+                time.sleep(0.5)
+                # choice for change monitor mode to auto and restart network manager
+                Colors.red(
+                    " \n If you want to change the wifi to normal state as well your network manager. y or n "
+                )
+                choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+                choice = choice.lower()
+                try:
+                    if choice == "y" or choice == "yes":
+                        mmca_rnm()
+                    elif choice == "n" or choice == "no":
+                        Operators.exit_author()
+                    else:
+                        Operators.case_default()
+                except ValueError:
+                    Operators.case_default()
 
+            try:
+                if px == "1":
+                    show_the_command(name_upper, name_lower)
+                elif px == "2":
+                    execute_the_command(name_upper, name_lower)
+                elif px == "3":
+                    Operators.exit_author()
+                else:
+                    Operators.case_default()
+            except ValueError:
+                Operators.case_default()
+
+        try:
+            if choice == "y" or choice == "yes":
+                show_execute(name_upper, name_lower)
+            elif choice == "n" or choice == "no":
+                CodeCreater.injection_code()
+            else:
+                Operators.case_default()
+        except ValueError:
+            Operators.case_default()
+
+class After:
+    # Session two
+    def session_two():
+        # Updating
+        time.sleep(0.5)
+        Colors.light_blue(" \n UPDATE STARTED ")
+        time.sleep(0.5)
+        os.system("\n sudo apt-get update")
+        time.sleep(0.5)
+        Colors.light_blue("\n UPDATE FINISHED ")
+        time.sleep(0.5)
+        # Make command's
+        Colors.light_blue("\n MAKING STARTED")
+        time.sleep(0.5)
+        os.system("\n sudo make")
+        time.sleep(0.5)
+        Colors.light_blue("\n MAKING FINISHED")
+        time.sleep(0.5)
+        Colors.light_blue(
+            " \n If you get any Error messages during the Make command execution y or n:"
+        )
+        time.sleep(0.5)
+        choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+        choice = choice.lower()
+        #  If the  make function has no error. This command will execute during the installation.
+        def make_after():
+
+            time.sleep(0.5)
+            # Make install
+            Colors.light_blue("\n RUNNING MAKE INSTALL ")
+            time.sleep(0.5)
+            os.system("\n sudo make install")
+            time.sleep(0.5)
+            Colors.light_blue("\n MAKE INSTALL FINISHED")
+            time.sleep(0.5)
+            os.system("\n sudo modprobe 8188eu")
+            time.sleep(0.5)
+            # Calling the function for enabling monitor mode
+            CodeCreater.injection_code()
+
+        try:
+            if choice == "y" or choice == "yes":
+                make_after()
+            elif choice == "n" or choice == "no":
+                make_after()
+        except ValueError:
+            Operators.case_default()
 
 # Privileges check
 # if os.geteuid() != 0:
