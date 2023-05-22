@@ -1,0 +1,1 @@
+cmd_/home/varkmarker/Tp-linkWN722NV2/Module.symvers :=  sed 's/ko$$/o/'  /home/varkmarker/Tp-linkWN722NV2/modules.order | scripts/mod/modpost -m     -o /home/varkmarker/Tp-linkWN722NV2/Module.symvers -e -i Module.symvers -T - 

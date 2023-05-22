@@ -1,0 +1,1 @@
+cmd_/home/varkmarker/Tp-linkWN722NV2/8188eu.o := ld -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --strip-debug  -r -o /home/varkmarker/Tp-linkWN722NV2/8188eu.o @/home/varkmarker/Tp-linkWN722NV2/8188eu.mod 

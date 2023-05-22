@@ -1,0 +1,1 @@
+cmd_/home/varkmarker/Tp-linkWN722NV2/8188eu.ko := ld -r -m elf_x86_64 -z noexecstack --no-warn-rwx-segments --build-id=sha1  -T arch/x86/module.lds -o /home/varkmarker/Tp-linkWN722NV2/8188eu.ko /home/varkmarker/Tp-linkWN722NV2/8188eu.o /home/varkmarker/Tp-linkWN722NV2/8188eu.mod.o;  true
