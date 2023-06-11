@@ -3,7 +3,6 @@ import os
 import time
 
 
-
 # Color's functions
 class Colors:
     def red(data):
@@ -141,61 +140,47 @@ class Before:
         time.sleep(0.5)
         os.system("\n sudo apt-get update")
         time.sleep(0.5)
-        Colors.light_blue("\n UPDATE FINISHED ")
-        time.sleep(0.5)
         # Upgrading
         Colors.light_blue("\n UPGRADE STARTED ")
         time.sleep(0.5)
-        os.system("\n sudo apt-get upgrade")
-        time.sleep(0.5)
-        Colors.light_blue("\n UPGRADE FINISHED ")
+        os.system("\n sudo apt-get full-upgrade")
         time.sleep(0.5)
         # Installing bc
         Colors.light_blue("\n INSTALLING BC ")
         time.sleep(0.5)
-        os.system("\n sudo apt-get install bc")
+        os.system("\n sudo apt-get install -y bc")
         time.sleep(0.5)
-        Colors.light_blue("\n INSTALLED BC ")
+        Colors.light_blue("\n INSTALLING REQUIRE TOOLS ")
+        time.sleep(0.5)
+        os.system("\n sudo apt-get install -y aircrack-ng wireless-tools net-tools")
         time.sleep(0.5)
         # Installing bulid-essential
         Colors.light_blue("\n INSTALLING BUILD-ESSENTIAL")
         time.sleep(0.5)
-        os.system("\n sudo apt-get install build-essential")
-        time.sleep(0.5)
-        Colors.light_blue("\n INSTALLED BUILD-ESSENTIAL")
+        os.system("\n sudo apt-get install -y build-essential")
         time.sleep(0.5)
         # Installing libelf-dev
         Colors.light_blue("\n INSTALLING LIBELF-DEV")
         time.sleep(0.5)
-        os.system("\n sudo apt-get install libelf-dev")
-        time.sleep(0.5)
-        Colors.light_blue("\n INSTALLED LIBELF-DEV")
+        os.system("\n sudo apt-get install -y libelf-dev")
         time.sleep(0.5)
         # Installing linux-headers
         Colors.light_blue("\n INSTALLING LINUX-HEADERS-UNAME-R")
         time.sleep(0.5)
-        os.system("\n sudo apt-get install linux-headers-$(uname -r)")
-        time.sleep(0.5)
-        Colors.light_blue("\n INSTALLED LINUX-HEADERS-UNAME-R")
+        os.system("\n sudo apt-get install -y linux-headers-$(uname -r)")
         time.sleep(0.5)
         # Installing dkms
         Colors.light_blue("\n INSTALLING DKMS")
         time.sleep(0.5)
-        os.system("\n sudo apt-get install dkms")
-        time.sleep(0.5)
-        Colors.light_blue("\n INSTALLED DKMS")
+        os.system("\n sudo apt-get install -y dkms")
         time.sleep(0.5)
         # Installing removing r8188eu
         Colors.light_gnome("\n REMOVING R8188EU.KO FILE FROM THE KERNAL")
         time.sleep(0.5)
         os.system("\n sudo rmmod r8188eu.ko")
-        Colors.light_gnome("\n REMOVED THE R8188EU.KO FILE FROM THE KERNAL")
-        time.sleep(0.5)
         # Command execution
         Colors.red("\n COMMAND EXECUTION STARTED")
         os.system('sudo echo "blacklist r8188eu" > "/etc/modprobe.d/realtek.conf" ')
-        time.sleep(0.5)
-        Colors.red("\n COMMAND EXECUTION COMPLETED")
         time.sleep(0.5)
         # Reboot
         Colors.red(" \n  TIME TO REBOOT ")
@@ -223,11 +208,203 @@ class Before:
         except ValueError:
             Operators.case_default()
 
+
+class ModeEnable:
+    # Get user wifi drive interface name
+    def injection_code():
+        time.sleep(0.5)
+        Colors.red("\n IWCONFIG RESULT")
+        os.system("\n sudo iwconfig")
+        time.sleep(0.5)
+        Colors.sky_blue("\n DRIVE INSTALLATION COMPLETED .")
+        time.sleep(0.5)
+        Colors.light_green("\n IF YOU WANT TO CHECK MONITOR MODE : PRESS = y")
+        time.sleep(0.5)
+        Colors.light_green("\n IF YOU WANT TO  EXIT FROM THE TOOL : PRESS = n")
+        time.sleep(0.5)
+        Colors.sky_blue("\n If you want to continue y or n : ")
+        choice = input(colr().hex("#fff300", " > ", rgb_mode=True))
+        choice = choice.lower()
+        
+        def next_code():
+            Colors.red("\n Enter you wifi adapter system name ? \n Eg: wlan0")
+            time.sleep(0.5)
+            interface = input(colr().hex("#fff300", "> ", rgb_mode=True))
+            time.sleep(0.5)
+            Colors.sky_blue(f" \n Driver : {interface}\n")
+            name_upper = interface.upper()
+            name_lower = interface.lower()
+            time.sleep(0.5)
+            Colors.cream("This is your name of the driver y or n")
+            choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+            choice = choice.lower()
+            # Choice of show and excute command.
+            def show_execute(name_upper, name_lower):
+                Colors.light_blue("\n [1] SHOW THE COMMAND  [2] Execute   \n [3] Exit")
+                px = input(colr().hex("#fff300", "> ", rgb_mode=True))
+                # Monitor mode command showing to the user.
+                def show_the_command(name_upper, name_lower):
+                    time.sleep(0.5)
+                    Colors.red("\n COMMANDS FOR MONITOR MODE ENABLING ")
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo ifconfig {name_lower} down")
+                    time.sleep(0.5)
+                    Colors.light_blue("\n AIRMON-NG KILL ALL PROCESS")
+                    time.sleep(0.5)
+                    Colors.green("\n $ sudo airmon-ng check kill")
+                    time.sleep(0.5)
+                    Colors.light_blue("\n ENABLE MONITOR MODE COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo iwconfig {name_lower} mode monitor")
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo ifconfig {name_lower} up")
+                    time.sleep(0.5)
+                    Colors.light_blue(
+                        "\n SHOWING THE IWCONFIG RESULT. \n CHECK MONITOR MODE IS ENABLE"
+                    )
+                    time.sleep(0.5)
+                    Colors.green("\n $ iwconfig")
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} INJECTION COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo aireplay-ng --test {name_lower}")
+                    time.sleep(0.5)
+                    Colors.red(
+                        "\n If you want to change the wifi to normal state as well your network manager. Use the below commands."
+                    )
+                    time.sleep(0.5)
+                    Colors.orange(
+                        "\n Commands for change the monitor mode to auto mode"
+                    )
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo ifconfig {name_lower} down")
+                    time.sleep(0.5)
+                    Colors.light_blue("\n CHANGE MODE TO AUTO")
+                    Colors.green(f"\n $ sudo iwconfig {name_lower} mode auto")
+                    time.sleep(0.5)
+                    Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo ifconfig {name_lower} up")
+                    time.sleep(0.5)
+                    Colors.orange("\n Command for restart the network manager.")
+                    time.sleep(0.5)
+                    Colors.green(f"\n $ sudo systemctl restart NetworkManager")
+                    time.sleep(0.5)
+                    Colors.red(
+                        "\n You can test by entering the following command manually"
+                    )
+                    Operators.exit_author()
+
+                # Monitor mode execute command
+                def execute_the_command(name_upper, name_lower):
+                    # Monior mode change to auto [mmca] and restart network manager [rnm]
+                    def mmca_rnm():
+                        time.sleep(0.5)
+                        Colors.light_blue(f"\n {name_upper} DOWN COMMAND")
+                        time.sleep(0.5)
+                        os.system(f"sudo ifconfig {name_lower} down")
+                        time.sleep(0.5)
+                        os.system(f"sudo iwconfig {name_lower} mode auto")
+                        time.sleep(0.5)
+                        Colors.light_blue(f"\n {name_upper} UP COMMAND")
+                        time.sleep(0.5)
+                        os.system(f"sudo ifconfig {name_lower} up")
+                        time.sleep(0.5)
+                        Colors.orange("\n Command for restart the network manager.")
+                        time.sleep(0.5)
+                        os.system(f"sudo systemctl restart NetworkManager")
+                        time.sleep(0.5)
+                        Operators.exit_author()
+
+                    time.sleep(0.5)
+                    Colors.red(f"\n {name_upper} DOWN")
+                    time.sleep(0.5)
+                    os.system(f" sudo ifconfig {name_lower} down")
+                    time.sleep(0.5)
+                    Colors.red("\n AIRMON-NG KILL ALL PROCESS")
+                    time.sleep(0.5)
+                    os.system("sudo airmon-ng check kill")
+                    time.sleep(0.5)
+                    Colors.red("\n ENABLE MONITOR MODE")
+                    time.sleep(0.5)
+                    os.system(f"sudo iwconfig {name_lower} mode monitor")
+                    time.sleep(0.5)
+                    Colors.red(f"\n {name_upper} UP")
+                    time.sleep(0.5)
+                    os.system(f"sudo ifconfig {name_lower} up")
+                    time.sleep(0.5)
+                    Colors.red(
+                        "\n SHOWING THE IWCONFIG RESULT. \n CHECK MONITOR MODE IS ENABLE"
+                    )
+                    time.sleep(0.5)
+                    os.system(" iwconfig")
+                    time.sleep(0.5)
+                    Colors.red(f"\n {name_upper} INJECTION STARTED")
+                    time.sleep(0.5)
+                    os.system(f"sudo aireplay-ng --test {name_lower}")
+                    time.sleep(0.7)
+                    Colors.red(f"\n {name_upper} INJECTION STOPPED")
+                    time.sleep(0.5)
+                    # choice for change monitor mode to auto and restart network manager
+                    Colors.red(
+                        " \n If you want to change the wifi to normal state as well your network manager. y or n "
+                    )
+                    choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
+                    choice = choice.lower()
+                    try:
+                        if choice == "y" or choice == "yes":
+                            mmca_rnm()
+                        elif choice == "n" or choice == "no":
+                            Operators.exit_author()
+                        else:
+                            Operators.case_default()
+                    except ValueError:
+                        Operators.case_default()
+
+                try:
+                    if px == "1":
+                        show_the_command(name_upper, name_lower)
+                    elif px == "2":
+                        execute_the_command(name_upper, name_lower)
+                    elif px == "3":
+                        Operators.exit_author()
+                    else:
+                        Operators.case_default()
+                except ValueError:
+                    Operators.case_default()
+
+            try:
+                if choice == "y" or choice == "yes":
+                    show_execute(name_upper, name_lower)
+                elif choice == "n" or choice == "no":
+                    CodeCreater.injection_code()
+                else:
+                    Operators.case_default()
+            except ValueError:
+                Operators.case_default()
+        try:
+            if choice == "y" or choice == "yes":
+                next_code()
+            elif choice == "n" or choice == "no":
+                Operators.exit_author()
+            else:
+                Operators.case_default()
+        except ValueError:
+            Operators.case_default()
+
+        
+
 class CodeCreater:
     # Get user wifi drive interface name
     def injection_code():
         time.sleep(0.5)
-        os.system("iwconfig")
+        os.system("sudo iwconfig")
         time.sleep(0.5)
         Colors.red("\n Enter you wifi adapter system name ? \n Eg: wlan0")
         time.sleep(0.5)
@@ -387,13 +564,16 @@ class CodeCreater:
         except ValueError:
             Operators.case_default()
 
+
 # class MakeError:
 class MakeError:
     # Comment Repository
     def comment_repo():
         # Comment
         def ct_repo():
-            replace = ["#deb http://http.kali.org/kali kali-rolling main contrib non-free"]
+            replace = [
+                "#deb http://http.kali.org/kali kali-rolling main contrib non-free"
+            ]
 
             with open("/etc/apt/sources.list", "r") as file:
                 commentrepo = file.read()
@@ -403,11 +583,10 @@ class MakeError:
                     replace[0],
                 )
             with open("/etc/apt/sources.list", "w") as file:
-                file.write("" +commentrepo)
-
+                file.write("" + commentrepo)
 
         def no_case():
-            
+
             print(colr().hex("#ff0000", "Kali Repo Not Comment Yet", rgb_mode=True))
 
         answer = input(
@@ -432,6 +611,7 @@ class MakeError:
 
         switch_case = switch.get(str(answer), Operators.case_default)
         switch_case()
+
     def iferrormake():
         time.sleep(0.5)
         Colors.orange(" \n If you get make error again")
@@ -442,6 +622,7 @@ class MakeError:
         time.sleep(0.5)
         Colors.light_blue(" \n AUTHOR: VARKMARKER \n")
         time.sleep(0.5)
+
     def aftermake():
         time.sleep(0.5)
         # Make installing
@@ -454,7 +635,7 @@ class MakeError:
         time.sleep(0.5)
         os.system("\n sudo apt-get install build-essential")
         time.sleep(0.5)
-       # Installing dkms
+        # Installing dkms
         Colors.light_blue("\n INSTALLING DKMS")
         time.sleep(0.5)
         os.system("\n sudo apt-get install dkms")
@@ -481,7 +662,8 @@ class MakeError:
             os.system("\n sudo modprobe 8188eu")
             time.sleep(0.5)
             # Calling the comment repository function
-            MakeError.comment_repo()    
+            MakeError.comment_repo()
+
         try:
             if choice == "y" or choice == "yes":
                 MakeError.iferrormake()
@@ -489,6 +671,7 @@ class MakeError:
                 make_after()
         except ValueError:
             Operators.case_default()
+
     def solvemake():
         Colors.red(" \n REMOVING MAKE COMMAND ")
         time.sleep(0.5)
@@ -497,7 +680,9 @@ class MakeError:
         # kali linux リポジトリが既に存在するかどうかを確認します
         file_path = "/etc/apt/sources.list"
         one_string = "deb http://http.kali.org/kali kali-rolling main contrib non-free"
-        second_string = "#deb http://http.kali.org/kali kali-rolling main contrib non-free"
+        second_string = (
+            "#deb http://http.kali.org/kali kali-rolling main contrib non-free"
+        )
 
         with open(file_path, "r") as f:
             file_contents = f.read()
@@ -548,7 +733,7 @@ class MakeError:
                 MakeError.aftermake()
 
             add_repo()
-    
+
 
 class After:
     # Session two
@@ -584,7 +769,7 @@ class After:
             os.system("\n sudo modprobe 8188eu")
             time.sleep(0.5)
             # Calling the function for enabling monitor mode
-            CodeCreater.injection_code()
+            ModeEnable.injection_code()
 
         try:
             if choice == "y" or choice == "yes":
@@ -630,7 +815,7 @@ else:
         1: Before.session_one,
         2: After.session_two,
         3: CodeCreater.injection_code,
-        4: Operators.exit,
+        4: Operators.exit_author
     }
     try:
         switch_case = switch.get(int(choice), Operators.case_default)
