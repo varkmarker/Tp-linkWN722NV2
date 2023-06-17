@@ -63,6 +63,8 @@ class Colors:
         print(colr().hex("#6666ff", data, rgb_mode=True))
 
 
+
+
 # Operator's
 class Operators:
     # Normal exit
@@ -820,6 +822,16 @@ class After:
         except ValueError:
             Operators.case_default()
 
+# Kali linux or parrotos
+class Os:
+    def parrot_kali():
+        time.sleep(0.5);
+        Colors.sky_blue("\nInstalling driver")
+        Colors.red("")
+        os.system("sudo apt-get install realtek-rtl8188eus-dkms")
+        ModeEnable.injection_code()
+        Colors.red(" If the injection is not working try the first step installation and the second step")
+    
 
 # Privileges check
 if os.geteuid() != 0:
@@ -848,15 +860,17 @@ else:
     )
     # Main choice function that call functions
     Colors.sky_blue(
-        "\n   [1] FIRST STEP               [2] SECOND STEP \n   [3] AUTOMATIC CODE GIVER     [4] EXIT"
+        "\n   [1] FIRST STEP               [2] SECOND STEP \n   [3] PARROT OR KALI           [4] AUTOMATIC CODE GIVER \n   [5] EXIT"
     )
     time.sleep(0.5)
     choice = input(colr().hex("#fff300", "> ", rgb_mode=True))
     switch = {
         1: Before.session_one,
         2: After.session_two,
-        3: CodeCreater.injection_code,
-        4: Operators.exit_author
+        3: Os.parrot_kali,
+        4: CodeCreater.injection_code,
+        5: Operators.exit_author
+
     }
     try:
         switch_case = switch.get(int(choice), Operators.case_default)
