@@ -986,7 +986,7 @@ class Os:
                         time.sleep(0.7)
                         Colors.red(f"\n {name_upper} INJECTION STOPPED")
                         time.sleep(0.5)
-                        Colors.red("\n If injection is not working try using the First step and second step installation")
+                        Colors.orange("\n IF INJECTION IS NOT WORKING TRY USING THE FIRST STEP AND SECOND STEP INSTALLATION")
                         # choice for change monitor mode to auto and restart network manager
                         Colors.red(
                             " \n If you want to change the wifi to normal state as well your network manager. y or n "
