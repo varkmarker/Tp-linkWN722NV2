@@ -14,19 +14,37 @@ Step 2
 
 Step 3
 
-$ sudo python3 driver.py
+$ sudo python3 drive.py
 
 Step 4
  
  First select the choice option as 1
 
-STEP 5
+ If you run this tool in the parrot os or kali linux select the choice option as 3
 
+STEP 5
+  
+  If you choose the third option at the beginnings.you do not need to do  the second option step. Options = [ 3 parrot or kali ]
+  
+  
   After the reboot select the choice option as 2 
 
-  If you want to get the monitor command 
- 
-  select the choice option as 3 
- 
+  There is three Options will pop up 
+  1 show the command
+  2 Execute
+  3 exit
+
+  Show the command  options :  will show the command that  we are using in this tool to enable monitor mode.
+
+  
+  Execute Option : will execute automatically enable monitor mode.
+
+  
+  Exit Option : will exit from the tool.
+
+  press the option   1 it will show the command
+
+  press the option  2  it will execute
+  
 
  
