@@ -10,16 +10,31 @@ Step 1
 Step 2
 
     cd Tp-linkWN722NV2
-Step 3
-
-    sudo python3 drive.py
 Step 4
- 
+
+    pip install -r requirements.txt
+  if the above pip command give error try this : 
+    
+    pip install -r requirements.txt -t .
+ $ RUN   
+    
+    sudo python3 drive.py
+ $ Online CMD 
+    
+    git clone https://github.com/varkmarker/Tp-linkWN722NV2.git && cd Tp-linkWN722NV2 && pip install -r requirements.txt && sudo python3 drive.py
+ $ If the Colr give error try this Online CMD : 
+
+    pip install -r requirements.txt -t . && sudo python3 drive.py
+ $ Change directory + Run
+    
+    cd Tp-linkWN722NV2 && sudo python3 drive.py
+Step 5
+
  First select the choice option as 1
 
  If you run this tool in the parrot os or kali linux select the choice option as 3
 
-STEP 5
+STEP 6
   
   If you choose the third option at the beginnings.you do not need to do  the second option step. Options = [ 3 parrot or kali ]
   
