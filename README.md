@@ -5,17 +5,14 @@ RealTek RTL8188eus WiFi driver with monitor mode &amp; frame injection support
 # INSTALLING STEPS
 
 Step 1
-
- $ git clone https://github.com/varkmarker/Tp-linkWN722NV2.git
-
+         
+    git clone https://github.com/varkmarker/Tp-linkWN722NV2.git
 Step 2
 
- $ cd Tp-linkWN722NV2
-
+    cd Tp-linkWN722NV2
 Step 3
 
-$ sudo python3 drive.py
-
+    sudo python3 drive.py
 Step 4
  
  First select the choice option as 1
