@@ -12,13 +12,13 @@ Step 2
     cd Tp-linkWN722NV2
 Step 4
 
-    pip install -r requirements.txt
+    pip install -r requirements.txt -t .
  $ RUN   
     
     sudo python3 drive.py
  $ Online CMD 
     
-    git clone https://github.com/varkmarker/Tp-linkWN722NV2.git && cd Tp-linkWN722NV2 && pip install -r requirements.txt && sudo python3 drive.py
+    git clone https://github.com/varkmarker/Tp-linkWN722NV2.git && cd Tp-linkWN722NV2 && pip install -r requirements.txt -t . && sudo python3 drive.py
  $ Change directory + Run
     
     cd Tp-linkWN722NV2 && sudo python3 drive.py
