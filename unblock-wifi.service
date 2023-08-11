@@ -1,0 +1,9 @@
+[Unit]
+Description=Unblock Wi-Fi RF Kill Switch
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/unblock_wifi.sh
+
+[Install]
+WantedBy=default.target
