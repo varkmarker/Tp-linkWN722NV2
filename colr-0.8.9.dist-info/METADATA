@@ -1,0 +1,25 @@
+Metadata-Version: 2.4
+Name: Colr
+Version: 0.8.9
+Summary: Easy terminal colors, with chainable methods.
+Home-page: https://github.com/welbornprod/colr
+Author: Christopher Welborn
+Author-email: cj@welbornprod.com
+Keywords: python module library 2 3 linux terminal escape codes color
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Topic :: Software Development :: Libraries
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
+License-File: LICENSE.txt
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license-file
+Dynamic: summary
+
+Easy terminal colors, with chainable methods.
