@@ -417,7 +417,9 @@ u8 rtw_cfg80211_ch_switch_notify(_adapter *adapter, u8 ch, u8 bw, u8 offset, u8 
 	if (ret != _SUCCESS)
 		goto exit;
 
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 9, 0))
+        cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0))
         cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0, 0);
 #elif (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0))
 	cfg80211_ch_switch_notify(adapter->pnetdev, &chdef, 0);
@@ -3111,7 +3113,11 @@ exit:
 
 }
 
-static int cfg80211_rtw_set_wiphy_params(struct wiphy *wiphy, u32 changed)
+static int cfg80211_rtw_set_wiphy_params(struct wiphy *wiphy,
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+                                         int radio_idx,
+#endif
+                                         u32 changed)
 {
 #if 0
 	struct iwm_priv *iwm = wiphy_to_iwm(wiphy);
@@ -3956,6 +3962,9 @@ static int cfg80211_rtw_set_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
 	struct wireless_dev *wdev,
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+        int radio_idx,
+#endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(2, 6, 36)) || defined(COMPAT_KERNEL_RELEASE)
 	enum nl80211_tx_power_setting type, int mbm)
 #else
@@ -4016,6 +4025,13 @@ static int cfg80211_rtw_get_txpower(struct wiphy *wiphy,
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
 	struct wireless_dev *wdev,
 #endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 17, 0))
+        int radio_idx,
+#endif
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 14, 0))
+        unsigned int link_id,
+#endif
+
 	int *dbm)
 {
 	_adapter *padapter = wiphy_to_adapter(wiphy);
@@ -4895,6 +4911,19 @@ exit:
 	return ret;
 }
 
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 7, 0))
+static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *ndev,
+		struct cfg80211_ap_update *info)
+{
+        _adapter *adapter = (_adapter *)rtw_netdev_priv(ndev);
+
+        RTW_INFO(FUNC_NDEV_FMT"\n", FUNC_NDEV_ARG(ndev));
+
+	return rtw_add_beacon(adapter, info->beacon.head,
+			      info->beacon.head_len, info->beacon.tail,
+			      info->beacon.tail_len);
+}
+#else
 static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *ndev,
 		struct cfg80211_beacon_data *info)
 {
@@ -4907,6 +4936,7 @@ static int cfg80211_rtw_change_beacon(struct wiphy *wiphy, struct net_device *nd
 
 	return ret;
 }
+#endif
 
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(5, 19, 0))
 static int cfg80211_rtw_stop_ap(struct wiphy *wiphy, struct net_device *ndev, unsigned int link_id)
@@ -5650,6 +5680,9 @@ static int	cfg80211_rtw_set_channel(struct wiphy *wiphy
 }
 
 static int cfg80211_rtw_set_monitor_channel(struct wiphy *wiphy
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 13, 0))
+        , struct net_device *dev
+#endif
 #if (LINUX_VERSION_CODE >= KERNEL_VERSION(3, 8, 0))
 	, struct cfg80211_chan_def *chandef
 #else
